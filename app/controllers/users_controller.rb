@@ -10,6 +10,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       render :new
+    end
   end
 
   def show
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
   def user_params
     params.require(:user).permit(:name)
   end
