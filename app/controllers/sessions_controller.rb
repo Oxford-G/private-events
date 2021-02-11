@@ -3,17 +3,21 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_name(params[:name])
+    user = User.find_by(name: session_params[:name])
     if user
-      session[:current_user_id] = user.id
-      redirect_to root_path, notice: 'You have successfully logged in.'
+      session[:user_id] = user.id
+      redirect_to user, notice: 'You have successfully logged in.'
     else
+      flash.now[:alert] = 'This user doesn\'t exist'
       render :new, alert: 'failed to log in'
     end
   end
 
   def destroy
-    session[:current_user_id] = nil
+    session[:user_id] = nil
     redirect_to root_path, notice: 'You have successfully logged out.'
+  end
+  def session_params
+    params.require(:session).permit(:name)
   end
 end
