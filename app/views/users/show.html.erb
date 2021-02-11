@@ -1,11 +1,2 @@
-<h1><%= @user.name %></h1>
-<% if current_user.events.empty? %>
-  <p> user has no events </p>
-<% else %>
-  <h1> Events </h1>
-  <% current_user.events.each do |event| %>
-    <%= event.name %>
-    <%= event.description%>
-    <%= event.date %>
-  <% end %>
-<% end %>
+<h1><%= current_user.name %></h1>
+

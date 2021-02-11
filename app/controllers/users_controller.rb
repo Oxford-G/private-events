@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       start_session(@user)
-      # redirect_to @user, notice: 'You have successfully logged in.'
+      flash[:alert] = 'You have successfully signed up.'
     else
       render :new, alert: 'user not valid'
     end
