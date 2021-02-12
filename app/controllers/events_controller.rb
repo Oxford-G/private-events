@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   include EventsHelper
   before_action :require_session, except: [:index]
-  # before_action :creator?, only: %i[edit destroy]
+  before_action :creator?, only: %i[edit destroy]
 
   def index
     @event = Event.all
