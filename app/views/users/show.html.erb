@@ -1,2 +1,23 @@
 <h1><%= current_user.name %></h1>
 
+<% if current_user.events.empty? %>
+  <p>user has no events created</p> 
+<% else %>
+  <div>
+    <% current_user.events.each do |event| %>
+      <p><%= event.name %></p>
+      <p><%= event.date %></p>
+      <p><%= event.description %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<% if current_user.events.empty? %>
+  <p>user has no events created</p> 
+<% else %>
+  <div>
+    <% current_user.events.each do |event| %>
+      <p><%= event.name %></p>
+    <% end %>
+  </div>
+<% end %>
