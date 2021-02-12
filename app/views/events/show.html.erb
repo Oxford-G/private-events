@@ -1,0 +1,23 @@
+<h1><%= current_user.name %></h1>
+<% if current_user.events.empty? %>
+  <p>user has no events created</p> 
+<% else %>
+  <div>
+    <% current_user.events.each do |event| %>
+      <p><%= event.name %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @event.invitation.empty? %>
+  <p>no attendee</p> 
+<% else %>
+  <div>
+    <% @event.invitation.each do |event| %>
+      <% current_user.events.each do |event| %>
+        <h5>Time: <%= event.date%><%= link_to "->", event_path(event) %></h5>
+        <p>Description: <%= event.description %> </p>
+      <%end%>
+    <% end %>
+  </div>
+<% end %>
