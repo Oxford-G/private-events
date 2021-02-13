@@ -1,7 +1,21 @@
-<h1> Events</h1>
+<div class="container">
+<h2>Past Events</h2>
 
-<% @event.each do |event| %>
-  <p><%= event.name %></p>
-  <p><%= event.date %></p>
-  <p><%= event.description %></p>
+  <% @previous_events.each do |event| %>
+      <h4><%= event.name %></h4>
+      <p><%= event.description %></p>
+      <span><%= event.creator.name %></span>
+      <h5><%= event.date%></h5>
+  <% end %> 
+
+</div>
+
+<div class="container">
+<h2>Upcoming Events</h2>
+<% @upcoming_events.each do |event| %>  
+      <h4><%= event.name %></h4>
+      <p><%= event.description %></p>
+      <span><%= event.creator.name %></span>
+      <h5><%= event.date%></h5>
 <% end %>
+</div>
