@@ -9,11 +9,11 @@
   </div>
 <% end %>
 
-<% if @event.invitation.empty? %>
+<% if @event.invitations.empty? %>
   <p>no attendee</p> 
 <% else %>
   <div>
-    <% @event.invitation.each do |event| %>
+    <% @event.invitations.each do |event| %>
       <% current_user.events.each do |event| %>
         <h5>Time: <%= event.date%><%= link_to "->", event_path(event) %></h5>
         <p>Description: <%= event.description %> </p>
