@@ -1,23 +1,33 @@
 <h1><%= current_user.name %></h1>
+<button><%= link_to 'Create Event', new_event_path %></button>
 
-<% if current_user.events.empty? %>
-  <p>user has no events created</p> 
-<% else %>
-  <div>
+<ul>
+  <% if current_user.events.empty? %>
+    <p>User has no events created</p> 
+  <% else %>
+  <h3 class = "card-title"> Past Events</h3>
     <% current_user.events.each do |event| %>
-      <p><%= event.name %></p>
-      <p><%= event.date %></p>
-      <p><%= event.description %></p>
-    <% end %>
-  </div>
-<% end %>
 
-<% if current_user.events.empty? %>
-  <p>user has no events created</p> 
-<% else %>
-  <div>
-    <% current_user.events.each do |event| %>
-      <p><%= event.name %></p>
-    <% end %>
-  </div>
-<% end %>
+      <% if event.date < Time.now %>
+        <li><%= link_to event.name, event %></li>
+        <p class = "card-text ">Description: <%= event.description %> </p>
+      <% elsif current_user.events.empty? %>
+        <p> No past events found </p>
+      <% end %>
+
+     <% end %>
+
+     <h3 class = "card-title"> Upcoming Events</h3>
+
+     <% current_user.events.each do |event|%>
+
+      <% if event.date > Time.now %>
+        <li><%= link_to event.name, event %></li>
+        <p class = "card-text ">Description: <%= event.description %> </p>
+      <% elsif current_user.events.empty?  %>
+        <p> No future events found </p>
+      <% end %>
+
+     <% end%>
+  <% end %>
+</ul>
