@@ -1,33 +1,53 @@
 <h1><%= current_user.name %></h1>
 <button><%= link_to 'Create Event', new_event_path %></button>
 
-<ul>
-  <% if current_user.events.empty? %>
-    <p>User has no events created</p> 
-  <% else %>
-  <h3 class = "card-title"> Past Events</h3>
-    <% current_user.events.each do |event| %>
 
-      <% if event.date < Time.now %>
-        <li><%= link_to event.name, event %></li>
-        <p class = "card-text ">Description: <%= event.description %> </p>
-      <% elsif current_user.events.empty? %>
-        <p> No past events found </p>
-      <% end %>
+<div class="section">
+  <div class="container">
+	  <div class="columns is-centered">
+      <div class="column is-9">
+        <h2 class="title is-2 is-spaced has-text-centered"><%= current_user.name %>'s Profile</h2>
+	      <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h3 class="subtitle is-3 has-text-centered">Hosted Events: <%= current_user.events.count %></h3>
+            <ul>
+              <% if current_user.events.empty? %>
+                <p>User is not hosting</p>
+              <% else %>
+                <% current_user.events.each do |event| %>
+                  <li class="has-text-centered"><%=link_to event.name, event_path(event) %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
 
-     <% end %>
+          <div class="column has-text-centered">
+            <h3 class="subtitle is-3">Upcoming Events: <%= current_user.attended_events.where('date >= ?', Date.today).count %></h3>
+            <ul>
+              <% if current_user.attended_events.where('date >= ?', Date.today).count.zero? %>
+                <p>No planned parties</p>
+              <% else %>
+                <% current_user.attended_events.where('date >= ?', Date.today).each do |event| %>
+                  <li class="has-text-centered"><%=link_to event.name, event_path(event) %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
 
-     <h3 class = "card-title"> Upcoming Events</h3>
-
-     <% current_user.events.each do |event|%>
-
-      <% if event.date > Time.now %>
-        <li><%= link_to event.name, event %></li>
-        <p class = "card-text ">Description: <%= event.description %> </p>
-      <% elsif current_user.events.empty?  %>
-        <p> No future events found </p>
-      <% end %>
-
-     <% end%>
-  <% end %>
-</ul>
+          <div class="column has-text-centered">
+            <h3 class="subtitle is-3 has-text-centered">Attended Events: <%= current_user.attended_events.where('date < ?', Date.today).count %></h3>
+            <ul>
+              <% if current_user.attended_events.empty? %>
+                <p>User is not partying</p>
+              <% else %>
+                <% current_user.attended_events.where('date < ?', Date.today).each do |event| %>
+                  <li class="has-text-centered"><%=link_to event.name, event_path(event) %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

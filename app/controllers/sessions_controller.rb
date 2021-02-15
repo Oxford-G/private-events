@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(name: session_params[:name])
     if user
       session[:user_id] = user.id
-      redirect_to user, notice: 'You have successfully logged in.'
+      redirect_to root_path, notice: 'You have successfully logged in.'
     else
       flash.now[:alert] = 'This user doesn\'t exist'
       render :new, alert: 'failed to log in'
