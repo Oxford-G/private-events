@@ -1,22 +1,38 @@
 
-<div class="container">
-  <h2>Upcoming Events</h2>
-  <% @upcoming_events.each do |event| %>  
-        <h4><%= event.name %></h4>
-        <p><%= event.description %></p>
-        <span><%= event.creator.name %></span>
-        <h5><%= event.date%></h5>
-  <% end %>
+<h2>Upcoming Events</h2>
+<div class="row">
+<% @upcoming_events.each do |event| %>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= event.name %></h5>
+        <p class="card-text"><%= event.description %></p>
+        <div class="d-flex">
+        <a href="#" class="btn"><%= event.creator.name %></a><br/>
+        <a href="#" class="btn  ml-2"><%= event.date%></a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+</br>
+
+<h2>Past Events</h2>
+<div class="row">
+<% @previous_events.each do |event| %>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= event.name %></h5>
+        <p class="card-text"><%= event.description %></p>
+        <div class="d-flex">
+        <a href="#" class="btn"><%= event.creator.name %></a><br/>
+        <a href="#" class="btn  ml-2"><%= event.date%></a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 </div>
 
-<div class="container">
-  <h2>Past Events</h2>
-
-  <% @previous_events.each do |event| %>
-      <h4><%= event.name %></h4>
-      <p><%= event.description %></p>
-      <span><%= event.creator.name %></span>
-      <h5><%= event.date%></h5>
-  <% end %> 
-
-</div>
