@@ -5,9 +5,9 @@ module ApplicationHelper
 
   def alerts
     if flash[:notice]
-      render  'shared/notice'
+      render 'shared/notice'
     elsif flash[:alert]
-      render  'shared/alert'
+      render 'shared/alert'
     end
   end
 

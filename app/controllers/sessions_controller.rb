@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     user = User.find_by(name: session_params[:name])
@@ -17,6 +16,7 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to root_path, notice: 'You have successfully logged out.'
   end
+
   def session_params
     params.require(:session).permit(:name)
   end
