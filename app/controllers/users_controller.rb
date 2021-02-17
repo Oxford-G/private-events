@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
+  before_action :require_session, except: [:new, :create]
 
   def index
     @users = User.all
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
 
   def show
     # @user = User.find(params[:id])
-    @invited_events = User.find(params[:id])
+    @invited_events = User.find(params[:id]).attended_events
     @created_events = current_user.events
   end
 

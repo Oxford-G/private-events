@@ -8,9 +8,9 @@
     </div>
                    
     <div>
-    <span>Invitees: <%= User.find(@event.invitations.invited.map { |enr| enr.user_id }).count %></span>
+    <span>Invitees: <%= User.find(@event.invitations.invited.map { |inv| inv.user_id }).count %></span>
     </div>
-                
+
     <ul>
       <% if User.find(@event.invitations.invited.map { |enr| enr.user_id }).any? %>
         <div>

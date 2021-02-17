@@ -1,8 +1,4 @@
 module UsersHelper
-  def set_user 
-    @user = User.find(params[:id]) 
-  end
-
   def start_session(user) 
     if user 
       session[:user_id] = user.id 
