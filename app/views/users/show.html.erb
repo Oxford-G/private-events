@@ -14,12 +14,12 @@
   </div>
 
   <div>
-    <h3>Upcoming Events: <%= current_user.attended_events.where('date >= ?', Date.today).count %></h3>
+    <h3>Upcoming Events: <%= current_user.attended_events.upcoming_events.count %></h3>
     <ul>
-      <% if current_user.attended_events.where('date >= ?', Date.today).count.zero? %>
+      <% if current_user.attended_events.upcoming_events.count.zero? %>
         <p>No planned parties</p>
       <% else %>
-        <% current_user.attended_events.where('date >= ?', Date.today).each do |event| %>
+        <% current_user.attended_events.upcoming_events.each do |event| %>
           <li class="has-text-centered"><%=link_to event.name, event_path(event) %></li>
         <% end %>
       <% end %>
@@ -27,12 +27,12 @@
   </div>
 
   <div>
-    <h3>Attended Events: <%= current_user.attended_events.where('date < ?', Date.today).count %></h3>
+    <h3>Attended Events: <%= current_user.attended_events.previous_events.count %></h3>
     <ul>
       <% if current_user.attended_events.empty? %>
         <p>User is not partying</p>
       <% else %>
-        <% current_user.attended_events.where('date < ?', Date.today).each do |event| %>
+        <% current_user.attended_events.previous_events.each do |event| %>
           <li><%=link_to event.name, event_path(event) %></li>
         <% end %>
       <% end %>
