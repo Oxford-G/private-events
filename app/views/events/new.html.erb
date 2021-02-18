@@ -1,0 +1,10 @@
+
+<%= form_with model: @event do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %></br>
+  <%= f.label :date %>
+  <%= f.date_field :date %></br>
+  <%= f.label :description %>
+  <%= f.text_field :description %>  
+  <%= f.submit 'Create Event!', class:'btn btn-success' %>
+<% end %>

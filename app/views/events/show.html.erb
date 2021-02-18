@@ -1,0 +1,55 @@
+<h1><%= current_user.name %></h1>
+  <div class="container">
+    <h2><%= @event.name %></h2>
+
+    <div >
+      <p><small>Hosted by</small></p>
+      <h4><%= @event.creator.name %></h4>
+    </div>
+                   
+    <div>
+    <span>Invitees: <%= User.find(@event.invitations.invited.map { |inv| inv.user_id }).count %></span>
+    </div>
+
+    <ul>
+      <% if User.find(@event.invitations.invited.map { |enr| enr.user_id }).any? %>
+        <div>
+          <% User.find(@event.invitations.invited.map { |enr| enr.user_id }).each do |user| %>
+            <li><p><%= user.name %></p></li>
+          <% end %>
+        </div>
+      <% end %>
+    </ul>
+    <span>Attendies: <%= User.find(@event.invitations.accepted.map { |enr| enr.user_id }).count %></span>
+    <ul>
+      <% if User.find(@event.invitations.accepted.map { |enr| enr.user_id }).any? %>
+        <div>
+          <% User.find(@event.invitations.accepted.map { |enr| enr.user_id }).each do |user| %>
+            <li><p><%= user.name %></p></li>
+          <% end %>
+        </div>
+      <% end %>
+    </ul>
+
+    <p><%= @event.description %></p><br/>
+       
+    <div>
+      <p><%= @event.date %></p>
+    </div>
+    <br/>
+
+    <% if @event.creator == current_user %>
+      <%= button_to "Invite", users_path, params: {:event_id => @event.id}, method: :get, class: "button is-info is-large is-fullwidth" %>
+    <% else %>
+      <% invitation = Invitation.find_by(event_id: @event.id, user_id: current_user.id) %>
+      <% if invitation && invitation.accepted? %>
+        <%= button_to "Cancel invitation", invitation_path(id: invitation.id, event_id: @event.id, user_id: current_user.id), method: :delete, class: "button is-danger is-large is-fullwidth" %>
+      <% else %>
+        <%= button_to "Accept Invitation", invitation_path(event_id: @event.id), method: :patch, class: "button is-primary is-large is-fullwidth" %>
+      <% end %>
+    <% end %>
+
+    <br/>
+
+    <%= link_to 'Back to Event List', root_path, class: "button is-fullwidth" %>
+  </div>

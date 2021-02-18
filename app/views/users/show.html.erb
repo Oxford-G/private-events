@@ -1,0 +1,41 @@
+<h2 ><%= current_user.name %>'s Profile</h2>
+<div>
+  <div>
+    <h3>Hosted Events: <%= current_user.events.count %></h3>
+    <ul>
+      <% if current_user.events.empty? %>
+        <p>User is not hosting</p>
+      <% else %>
+        <% current_user.events.each do |event| %>
+          <li><%=link_to event.name, event_path(event) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div>
+    <h3>Upcoming Events: <%= current_user.attended_events.upcoming_events.count %></h3>
+    <ul>
+      <% if current_user.attended_events.upcoming_events.count.zero? %>
+        <p>No planned parties</p>
+      <% else %>
+        <% current_user.attended_events.upcoming_events.each do |event| %>
+          <li class="has-text-centered"><%=link_to event.name, event_path(event) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div>
+    <h3>Attended Events: <%= current_user.attended_events.previous_events.count %></h3>
+    <ul>
+      <% if current_user.attended_events.empty? %>
+        <p>User is not partying</p>
+      <% else %>
+        <% current_user.attended_events.previous_events.each do |event| %>
+          <li><%=link_to event.name, event_path(event) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

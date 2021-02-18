@@ -1,0 +1,38 @@
+
+<h2>Upcoming Events</h2>
+<div class="row">
+<% @upcoming_events.each do |event| %>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><%= event.name %></h3>
+        <p class="card-text"><%= event.description %></p>
+        <div class="d-flex">
+        <a href="#" class="btn"><%= event.creator.name %></a><br/>
+        <a href="#" class="btn  ml-2"><%= event.date%></a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+</br>
+
+<h2>Past Events</h2>
+<div class="row">
+<% @previous_events.each do |event| %>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><%= event.name %></h3>
+        <p class="card-text"><%= event.description %></p>
+        <div class="d-flex">
+        <a href="#" class="btn"><%= event.creator.name %></a><br/>
+        <a href="#" class="btn  ml-2"><%= event.date%></a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+

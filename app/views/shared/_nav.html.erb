@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+<%= link_to "Oxy-Ray Events", root_path, class:"navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <ul class="navbar-nav">
+    <% if current_user %>
+    <li class="nav-item active">
+    <%= link_to current_user.name + ' ' + 'Events', user_path(current_user), class:"nav-link btn btn-outline-success my-2 my-sm-0" %>
+    </li>
+    <% end %>
+    <% if current_user %>
+    <li class="nav-item active">
+    <%= link_to 'Create Event', new_event_path, class: "nav-link btn btn-outline-success my-2 my-sm-0 ml-2" %>
+    </li>
+    <% end %>
+    <% if current_user %>
+    <li class="nav-item active">
+    <%= link_to 'Log Out', session_path(session) , method: 'delete', class:"nav-link btn btn-outline-success my-2 my-sm-0 ml-2" %>
+    </li>
+    <% else %>
+    <li class="nav-item active">
+    <%= link_to 'Sign In', new_session_path, class:"nav-link btn btn-outline-success my-2 my-sm-0" %>
+    </li>
+    <li class="nav-item active">
+    <%= link_to 'Sign Up', new_user_path, class:"nav-link btn btn-outline-success my-2 my-sm-0" %>
+    </li>
+    <% end %>
+    </ul>
+  </div>
+</nav>
+</br>
